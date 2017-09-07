@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+//        maven { url "https://repo.spring.io/libs-release" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath "io.spring.gradle:dependency-management-plugin:1.0.3.RELEASE"
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'io.spring.dependency-management'
+jar {
+    baseName = 'zeus-dao'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    mavenCentral()
+}
+
+sourceSets{
+    main {
+        java {
+            srcDir 'src/mian/java' // 指定源码目录
+        }
+        resources {
+            srcDir 'src/mian/resources' //资源目录
+        }
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-data-jpa:1.5.6.RELEASE"
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.16.16'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5' //log 支持
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+    compile group: 'com.baomidou', name: 'mybatis-plus', version: '2.0.5' //MP 核心库
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.2.2'// swagger2支持
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.2.2'
+    compile project (':zeus-model')
+}
+

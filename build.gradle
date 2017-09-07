@@ -1,0 +1,89 @@
+buildscript {
+    repositories {
+//        maven { url "https://repo.spring.io/libs-release" }
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenLocal()
+        mavenCentral()
+    }
+//    dependencies {
+//        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE'
+//        classpath "io.spring.gradle:dependency-management-plugin:0.6.1.RELEASE"
+//    }
+}
+//ext {
+//    springbootversion='1.5.1.RELEASE'
+//
+//}
+//version = '1.0'
+//allprojects {
+//
+//    apply plugin: 'java'
+//    apply plugin: 'maven'
+//    apply plugin: 'groovy'
+//    repositories {
+//        mavenLocal()
+//        //maven { url "http://repo.spring.io/snapshot" }
+//        maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+//        mavenCentral()
+//    }
+//}
+//
+//subprojects {
+//    apply plugin: 'idea'
+//    apply plugin: 'project-report'
+//    compileJava.options.encoding = 'UTF-8'
+//    sourceCompatibility = 1.8
+//    tasks.withType(Test) {
+//        test {
+//            testLogging {
+//                showStackTraces = true
+//                showExceptions = true
+//                showCauses = true
+//                displayGranularity = maxGranularity
+//                exceptionFormat = 'full'
+//            }
+//        }
+//    }
+//
+//}
+//
+////project(':pojo') {
+////
+////    apply plugin: 'java'
+//////    apply plugin: 'org.springframework.boot'
+////    dependencies {
+////        compile group: 'org.projectlombok',name: 'lombok', version: '1.16.16'
+////        compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.5' //log 支持
+////        compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.5'
+////        compile group: 'com.baomidou', name: 'mybatis-plus', version: '2.0.5' //MP 核心库
+////        compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.2.2'// swagger2支持
+////        compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.2.2'
+////    }
+////    dependencyManagement {
+////        imports { mavenBom("org.springframework.boot:spring-boot-dependencies:${springBootVersion}") }
+////    }
+////}
+////
+////project(':web') {
+////    apply plugin: 'java'
+////    apply plugin: 'org.springframework.boot'
+////
+////    jar {
+////        baseName = 'gs-multi-module-application'
+////        version = '0.0.1-SNAPSHOT'
+////    }
+////    dependencies {
+////        compile  "org.springframework.boot:spring-boot-starter-web:$springbootversion"
+////        compile  'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1'
+////        compile  'org.apache.commons:commons-lang3:3.1'
+////        compile group: 'com.alibaba', name: 'druid', version: '1.0.29' //druid阿里巴巴数据库连接池
+////        compile group: 'com.alibaba', name: 'fastjson', version: '1.2.13' // fastjson阿里巴巴jSON处理器
+////        compile group: 'com.baomidou', name: 'mybatis-plus', version: '2.0.5' //MP 核心库
+////        compile group: 'mysql', name: 'mysql-connector-java'
+////        compile  project(":pojo")
+////    }
+////
+////}
+//task listJars << {
+//    configurations.compile.each { File file -> println file.absolutePath }
+//}

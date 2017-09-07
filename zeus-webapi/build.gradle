@@ -1,0 +1,62 @@
+ext {
+    springbootversion ='1.5.6.RELEASE'
+
+}
+
+buildscript {
+    repositories {
+        maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:1.5.6.RELEASE'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+
+jar {
+    baseName = 'zeus-web'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+    mavenCentral()
+}
+
+springBoot {
+    mainClass = "com.tangjing.project.SampleController.class"
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-web"
+    compile "org.springframework.boot:spring-boot-starter-jdbc"
+    compile "org.springframework.boot:spring-boot-starter-data-redis"
+    compile "org.springframework.boot:spring-boot-starter-data-jpa"
+    compile "org.springframework.boot:spring-boot-starter-security"
+    compile "org.springframework.security.oauth:spring-security-oauth2"
+
+    compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.2.2'// swagger2支持
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.2.2'
+
+    compile "com.h2database:h2"
+
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1'
+    compile 'org.apache.commons:commons-lang3:3.1'
+    compile 'com.alibaba:fastjson:1.2.13' // fastjson阿里巴巴jSON处理器
+    compile 'com.alibaba:druid:1.0.29' //druid阿里巴巴数据库连接池
+    compile 'com.baomidou:mybatis-plus:2.0.5' //MP 核心库
+    compile 'mysql:mysql-connector-java'
+
+
+
+    compile project(":zeus-model")
+    compile project(":zeus-service")
+    compile project(":zeus-util")
+}

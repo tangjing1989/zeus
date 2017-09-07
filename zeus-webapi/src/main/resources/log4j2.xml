@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--monitorInterval 指log4j2每隔多少秒，自动监控该配置文件是否有变化，如果变化，则自动根据文件内容重新配置（很不错的功能！）-->
+<Configuration status="off" monitorInterval="1800">
+    <properties>
+        <property name="LOG_HOME">./logs/</property>
+        <property name="FILE_NAME">mylog</property>
+    </properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!--RollingRandomAccessFile  即表示以文件方式记录，注意一下filePattern 的设置，
+        它与20行的SizeBasedTriggeringPolicy （表示单个文件最大多少容量）结合在一起，非常有用，
+        以这段配置为例，当单个文件达到10M后，会自动将以前的内容，先创建类似 2014-09（年-月）的目录，
+        然后按 "xxx-年-月-日-序号"命名，打成压缩包（很体贴的设计，即省了空间，又不丢失以前的日志信息）-->
+        <RollingRandomAccessFile name="running-log" fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%date{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread][%file:%line] - %msg%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <!--DefaultRolloverStrategy max="20"表示压缩包，最多保留20个-->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingRandomAccessFile>
+    </Appenders>
+    <!--定义了一个新logger，它的级别是trace ，使用文件方式来记录日志，additivity="true" 这里注意一下，
+    因为下面还有一个root logger，任何其它的logger最终都相当于继承自root logger，
+    所以“com.tangjing.wind”这个logger中，如果记录了error及以上级别的日志，除了文件里会记录外，root logger也会生效，即：控制台也会输出一次。
+    如果把additivity="true" 中的true，改成false，root logger就不会再起作用，即只会记录在文件里，控制台无输出-->
+    <Loggers>
+        <Logger name="mylog" level="trace"  additivity="true">
+            <AppenderRef ref="running-log"/>
+        </Logger>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
